@@ -157,8 +157,8 @@ public class NacosDiscoveryProperties {
 
 		serverAddr = Objects.toString(serverAddr, "");
 		if (serverAddr.startsWith("https") || serverAddr.startsWith("http")) {
-			// http://
-			if (serverAddr.lastIndexOf("/") > 6) {
+			int lastIndex = serverAddr.lastIndexOf("/");
+			if (7 != lastIndex && 6 != lastIndex) {
 				serverAddr = serverAddr.substring(0, serverAddr.length() - 1);
 			}
 		} else if (serverAddr.lastIndexOf("/") != -1) {
