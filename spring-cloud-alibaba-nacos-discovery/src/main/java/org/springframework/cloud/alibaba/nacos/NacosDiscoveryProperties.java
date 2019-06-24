@@ -156,7 +156,12 @@ public class NacosDiscoveryProperties {
 		}
 
 		serverAddr = Objects.toString(serverAddr, "");
-		if (serverAddr.lastIndexOf("/") != -1) {
+		if (serverAddr.startsWith("https") || serverAddr.startsWith("http")) {
+			// http://
+			if (serverAddr.lastIndexOf("/") > 6) {
+				serverAddr = serverAddr.substring(0, serverAddr.length() - 1);
+			}
+		} else if (serverAddr.lastIndexOf("/") != -1) {
 			serverAddr = serverAddr.substring(0, serverAddr.length() - 1);
 		}
 		endpoint = Objects.toString(endpoint, "");
